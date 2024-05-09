@@ -50,7 +50,7 @@ const Navbar = () => {
             ) : (
               <>
                 <Link
-                  href="/api/auth/register"
+                  href="/auth/signup"
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
@@ -60,7 +60,7 @@ const Navbar = () => {
                 </Link>
 
                 <Link
-                  href="/api/auth/login"
+                  href="/auth/signin"
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
