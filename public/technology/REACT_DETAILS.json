@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "What is Reat?",
+        "description": "As your application grows, you might want to consider a more integrated setup. There are several JavaScript toolchains we recommend for larger applications. Each of them can work with little to no configuration and lets you take full advantage of the rich React ecosystem.",
+        "details": "As your application grows, you might want to consider a more integrated setup. There are several JavaScript toolchains we recommend for larger applications. Each of them can work with little to no configuration and lets you take full advantage of the rich React ecosystem."
+    },
+    {
+        "id": 2,
+        "title": "what is react b?",
+        "description": "description",
+        "details": "details"
+    },
+    {
+        "id": 3,
+        "title": "what is react c?",
+        "description": "description",
+        "details": "details"
+    },
+    {
+        "id": 4,
+        "title": "what is react d?",
+        "description": "description",
+        "details": "details"
+    },
+    {
+        "id": 5,
+        "title": "what is react e?",
+        "description": "description",
+        "details": "details"
+    },
+    {
+        "id": 6,
+        "title": "what is react f?",
+        "description": "description",
+        "details": "details"
+    }
+]
