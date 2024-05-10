@@ -1,5 +1,6 @@
-import MaxWidthWrapper from "../components/MaxWidthWrapper";
-import Phone from "../components/Phone";
+
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import Phone from "@/components/Phone";
 import { Check, Star } from "lucide-react";
 
 export default function Home() {
