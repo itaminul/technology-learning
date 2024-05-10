@@ -12,6 +12,7 @@ const Navbar = () => {
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
             teach<span className="text-green-600">Learn</span>
+            case<span className="text-green-600">Cobra</span>
           </Link>
           <div className="h-full flex items-center space-x-4">
             {user ? (
@@ -79,6 +80,18 @@ const Navbar = () => {
                   Create Case
                   <ArrowRight className="ml-1.5 h-5 w-5" />
                 </Link>
+                <div>
+                  <Link
+                    href="/configure/upload "
+                    className={buttonVariants({
+                      size: "sm",
+                      className: "hidden sm:flex items-center gap-1",
+                    })}
+                  >
+                    Create Case
+                    <ArrowRight className="ml-1.5 h-5 w-5" />
+                  </Link>
+                </div>
               </>
             )}
           </div>
