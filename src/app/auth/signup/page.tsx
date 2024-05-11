@@ -1,6 +1,13 @@
 'use client'
+
+import SingUpForm from "./signupform";
+
 const SingUp = () => {
-  return <>sign in</>;
+  return (
+    <>
+      <SingUpForm />
+    </>
+  );
 };
 
 export default SingUp;
