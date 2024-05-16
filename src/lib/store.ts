@@ -1,8 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import bookSlice from "./redux/features/bookSlice";
+const rootReducer = combineReducers({
+  booking: bookSlice,
+});
+const middleware = (getDefaultMiddleware: any) => 
+  getDefaultMiddleware().concat([
 
+  ])
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: rootReducer, middleware
   });
 };
 
