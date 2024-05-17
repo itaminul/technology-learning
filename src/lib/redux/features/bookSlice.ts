@@ -5,7 +5,7 @@ interface BookState {
 }
 const initialState: BookState = {
   floor: null,
-  unit: "",
+  unit: "100",
 };
 export const bookSlice = createSlice({
   name: "booking",
