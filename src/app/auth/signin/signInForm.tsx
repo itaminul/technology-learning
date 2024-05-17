@@ -1,6 +1,8 @@
 "use client";
+import { useCreateRegisterMutation } from "@/lib/redux/services/userRegisterApiService";
 import { useState, useEffect } from "react";
 const LoginForm = () => {
+  const [createRegistration ]= useCreateRegisterMutation();
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
