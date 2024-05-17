@@ -1,12 +1,41 @@
 "use client";
 
 import { useAppDispatch, useAppSelector, useAppStore } from "@/lib/hooks";
-import { updateFloor, updateUnit } from "@/lib/redux/features/bookSlice";
-
+import { updateUnit } from "@/lib/redux/features/bookSlice";
+import { useCreateRegisterMutation } from "@/lib/redux/services/userRegisterApiService";
+import { useState } from "react";
 const SignUpForm = () => {
   const store = useAppStore();
   const unit = useAppSelector((state) => state.booking.unit);
   const dispatch = useAppDispatch();
+  const [createRegistration] = useCreateRegisterMutation();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      await createRegistration({
+        email: formData.email,
+        password: formData.password,
+      }).unwrap();
+      // Reset form data after successful submission
+      setFormData({
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      console.error("Failed to create registration: ", error);
+    }
+  };
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -17,13 +46,17 @@ const SignUpForm = () => {
                 value={unit}
                 type="text"
                 onChange={(e) => dispatch(updateUnit(e.target.value))}
-                className='dark:bg-gray-700'
-                style={{borderColor: "blue"}}
+                className="dark:bg-gray-700"
+                style={{ borderColor: "blue" }}
               />
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 md:space-y-6"
+                action="#"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -35,6 +68,8 @@ const SignUpForm = () => {
                     type="email"
                     name="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required
@@ -52,6 +87,8 @@ const SignUpForm = () => {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    value={formData.password}
+                    onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
