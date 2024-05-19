@@ -3,6 +3,9 @@
 import { useAppDispatch, useAppSelector, useAppStore } from "@/lib/hooks";
 import { useCreateRegisterMutation } from "@/lib/redux/services/userRegisterApiService";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const SignUpForm = () => {
   const store = useAppStore();
   const unit = useAppSelector((state) => state.booking.unit);
@@ -27,13 +30,14 @@ const SignUpForm = () => {
         email: formData.email,
         password: formData.password,
       }).unwrap();
+      toast.success("Registration successful!");
       // Reset form data after successful submission
       setFormData({
         email: "",
         password: "",
       });
     } catch (error) {
-      console.error("Failed to create registration: ", error);
+      toast.error("Failed to create registration: " + error);
     }
   };
   return (
@@ -42,7 +46,6 @@ const SignUpForm = () => {
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
               </h1>
@@ -148,6 +151,18 @@ const SignUpForm = () => {
           </div>
         </div>
       </section>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };
