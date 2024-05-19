@@ -1,8 +1,44 @@
 "use client";
+import {
+  loginApi,
+  useCreateLoginMutation,
+} from "@/lib/redux/services/userLoginApiService";
 import { useCreateRegisterMutation } from "@/lib/redux/services/userRegisterApiService";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from 'next/router';
+import { revalidatePath } from 'next/cache'
+
 const LoginForm = () => {
   
+  const [createLogin] = useCreateLoginMutation();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: [e.target.value],
+    });
+  };
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      await createLogin({
+        email: formData.email,
+        password: formData.password,
+      }).unwrap();
+      toast.success("Login successful!");
+      revalidatePath('/admin/dasboard') 
+
+    } catch (error) {
+      toast.error("Failed to Login : " + error);
+    }
+  };
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -12,7 +48,12 @@ const LoginForm = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Login to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#" method="POST">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 md:space-y-6"
+                action="#"
+                method="POST"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -24,6 +65,7 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     id="email"
+                    onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required
@@ -41,6 +83,7 @@ const LoginForm = () => {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
@@ -88,6 +131,18 @@ const LoginForm = () => {
           </div>
         </div>
       </section>
+      <ToastContainer
+        position="top-right"
+        autoClose={8000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };
