@@ -1,14 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import bookSlice from "./redux/features/bookSlice";
 import { registerApi } from "./redux/services/userRegisterApiService";
-import { loginApi } from './redux/services/userLoginApiService';
+import { loginApi } from "./redux/services/userLoginApiService";
 const rootReducer = combineReducers({
   booking: bookSlice,
   [registerApi.reducerPath]: registerApi.reducer,
-  [loginApi.reducerPath]: loginApi.reducer
+  [loginApi.reducerPath]: loginApi.reducer,
 });
 const middleware = (getDefaultMiddleware: any) =>
-  getDefaultMiddleware().concat([registerApi.middleware]);
+  getDefaultMiddleware().concat([registerApi.middleware, loginApi.middleware]);
+
 export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
