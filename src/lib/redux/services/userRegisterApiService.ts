@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { API_BASE_URL} from '../../../config';
+import { API_BASE_URL } from '../../../config'
 import { headers } from "next/headers";
 
 interface RegisterDataType {
-  email?: string;
+  username?: string;
   password?: string;
 }
 export const registerApi = createApi({
@@ -18,7 +18,7 @@ export const registerApi = createApi({
       Partial<RegisterDataType>
     >({
       query: (createRegister: any) => ({
-        url: "auth/register",
+        url: "user/register",
         method: "POST",
         body: createRegister,
       }),

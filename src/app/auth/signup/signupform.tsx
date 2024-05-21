@@ -11,9 +11,8 @@ const SignUpForm = () => {
   const unit = useAppSelector((state) => state.booking.unit);
   const dispatch = useAppDispatch();
   const [createRegistration] = useCreateRegisterMutation();
-
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -27,13 +26,13 @@ const SignUpForm = () => {
     e.preventDefault();
     try {
       await createRegistration({
-        email: formData.email,
+        username: formData.username,
         password: formData.password,
       }).unwrap();
       toast.success("Registration successful!");
       // Reset form data after successful submission
       setFormData({
-        email: "",
+        username: "",
         password: "",
       });
     } catch (error) {
@@ -63,9 +62,9 @@ const SignUpForm = () => {
                   </label>
                   <input
                     type="email"
-                    name="email"
-                    id="email"
-                    value={formData.email}
+                    name="username"
+                    id="username"
+                    value={formData.username}
                     onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
